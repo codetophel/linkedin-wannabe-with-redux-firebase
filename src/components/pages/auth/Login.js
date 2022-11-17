@@ -33,10 +33,10 @@ const Login = () => {
     });
     dispatch(
       login({
-        displayName: user.name,
+        displayName: name,
         email: user.email,
         uid: user.uid,
-        photoURL: user.profilePic,
+        photoURL: profilePic,
       })
     );
   };
@@ -47,10 +47,10 @@ const Login = () => {
       .then((user) =>
         dispatch(
           login({
-            displayName: user.name,
+            displayName: user.user.displayName,
             email: user.user.email,
             uid: user.user.uid,
-            photoURL: user.profilePic,
+            profilePic: user.user.photoURL,
           })
         )
       )

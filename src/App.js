@@ -20,8 +20,8 @@ const App = () => {
           login({
             email: user.email,
             uid: user.uid,
-            displayName: user.name,
-            photoURL: user.profilePic,
+            displayName: user.displayName,
+            profilePic: user.photoURL,
           })
         );
       } else {
