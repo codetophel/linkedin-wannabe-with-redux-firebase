@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { auth } from '../../../db/firebase';
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import './Login.css';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../features/userSlice';
@@ -23,24 +27,34 @@ const Login = () => {
       email,
       password
     );
-    console.log(`User ${user.uid} created`);
     await updateProfile(user, {
-      photoURL: profilePic,
       displayName: name,
+      photoURL: profilePic,
     });
     dispatch(
       login({
+        displayName: user.name,
         email: user.email,
         uid: user.uid,
-        displayName: name,
-        photoURL: profilePic,
+        photoURL: user.profilePic,
       })
     );
   };
 
   const loginToApp = (e) => {
     e.preventDefault();
-    console.log('Login');
+    signInWithEmailAndPassword(auth, email, password)
+      .then((user) =>
+        dispatch(
+          login({
+            displayName: user.name,
+            email: user.user.email,
+            uid: user.user.uid,
+            photoURL: user.profilePic,
+          })
+        )
+      )
+      .catch((err) => alert(err.message));
   };
 
   return (

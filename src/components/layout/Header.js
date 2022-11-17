@@ -8,9 +8,16 @@ import {
 } from '@mui/icons-material';
 import HeaderOptions from './HeaderOptions';
 import './Header.css';
-import { Avatar } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../features/userSlice';
+import { auth } from '../../db/firebase';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const logoutOfApp = () => {
+    dispatch(logout());
+    auth.signOut();
+  };
   return (
     <div className='header'>
       <div className='header-left'>
@@ -29,7 +36,11 @@ const Header = () => {
         <HeaderOptions title='Jobs' icon={<BusinessCenter />} />
         <HeaderOptions title='Messaging' icon={<Chat />} />
         <HeaderOptions title='Notifications' icon={<Notifications />} />
-        <HeaderOptions avatar={<Avatar />} />
+        <HeaderOptions
+          title='Me'
+          avatar='https://cdn.cdnlogo.com/logos/l/66/linkedin-icon.svg'
+          onClick={logoutOfApp}
+        />
       </div>
     </div>
   );
