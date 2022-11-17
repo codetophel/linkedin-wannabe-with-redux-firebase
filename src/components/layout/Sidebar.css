@@ -80,6 +80,7 @@
 
 .sidebar-bottom > h4 {
   margin-bottom: 10px;
+  border-bottom: 1px solid lightgray;
 }
 .sidebar-recentItem {
   display: flex;
