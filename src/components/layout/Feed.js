@@ -11,8 +11,12 @@ import Post from './Post';
 import { addDoc, collection, getDocs, orderBy } from 'firebase/firestore';
 import { db } from '../../db/firebase';
 import './Feed.css';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../features/userSlice';
 
 const Feed = () => {
+  const user = useSelector(selectUser);
+
   const [posts, setPosts] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -41,10 +45,10 @@ const Feed = () => {
   const sendPost = (e) => {
     e.preventDefault();
     addDoc(collection(db, 'posts'), {
-      name: 'Akande Nicodemus',
-      description: 'This is a test description',
+      name: user.displayName,
+      description: user.email,
       message: input,
-      photoUrl: '',
+      photoUrl: user.photoURL || '',
       timestamp: new Date(),
     });
 

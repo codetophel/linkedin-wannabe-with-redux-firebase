@@ -36,11 +36,7 @@ const Header = () => {
         <HeaderOptions title='Jobs' icon={<BusinessCenter />} />
         <HeaderOptions title='Messaging' icon={<Chat />} />
         <HeaderOptions title='Notifications' icon={<Notifications />} />
-        <HeaderOptions
-          title='Me'
-          avatar='https://cdn.cdnlogo.com/logos/l/66/linkedin-icon.svg'
-          onClick={logoutOfApp}
-        />
+        <HeaderOptions title='Me' avatar={true} onClick={logoutOfApp} />
       </div>
     </div>
   );
