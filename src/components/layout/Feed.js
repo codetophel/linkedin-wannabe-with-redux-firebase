@@ -8,7 +8,13 @@ import {
 } from '@mui/icons-material';
 import InputOptions from './InputOptions';
 import Post from './Post';
-import { addDoc, collection, getDocs, orderBy } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  getDocs,
+  orderBy,
+  query,
+} from 'firebase/firestore';
 import { db } from '../../db/firebase';
 import './Feed.css';
 import { useSelector } from 'react-redux';
@@ -22,19 +28,19 @@ const Feed = () => {
   const [loading, setLoading] = useState(false);
 
   const getPosts = async () => {
-    await getDocs(collection(db, 'posts'), orderBy('timestamp', 'desc')).then(
-      (snapshot) => {
-        let allposts = [];
-        snapshot.docs.map((doc) => {
-          allposts.push({
-            id: doc.id,
-            data: doc.data(),
-          });
-          setPosts(allposts);
-          return allposts;
+    await getDocs(
+      query(collection(db, 'posts'), orderBy('timestamp', 'desc'))
+    ).then((snapshot) => {
+      let allposts = [];
+      snapshot.docs.map((doc) => {
+        allposts.push({
+          id: doc.id,
+          data: doc.data(),
         });
-      }
-    );
+        setPosts(allposts);
+        return allposts;
+      });
+    });
   };
 
   useEffect(() => {
