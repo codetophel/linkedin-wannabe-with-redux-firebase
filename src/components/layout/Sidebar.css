@@ -102,3 +102,15 @@
   margin-right: 10px;
   margin-left: 5px;
 }
+
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    position: initial;
+    flex: 1;
+    z-index: 0;
+    margin: 30px 18px;
+  }
+  .sidebar-bottom {
+    display: none;
+  }
+}

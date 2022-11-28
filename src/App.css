@@ -13,3 +13,15 @@
   margin-right: 20px;
   max-width: 1200px;
 }
+
+@media only screen and (max-width: 600px) {
+  .App {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .app-body {
+    flex-direction: column;
+  }
+}
